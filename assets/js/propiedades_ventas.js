@@ -51,7 +51,7 @@ const propiedades_ventas = [
 },
 {    
             nombre: 'Condominio moderno en zona residencial',
-            src: '',
+            src: 'https://a0.muscache.com/im/pictures/9f5ac2de-c98a-4c0e-b1c8-9599eb813086.jpg?im_w=1200&im_format=avif',
             descripcion: 'Este elegante condominio moderno está ubicado en una tranquila zona residencial',
             ubicacion: '123 Main Street, Anytown, CA 91234',
             habitaciones: 2,
@@ -76,91 +76,46 @@ let permite = [
         icon: "fa-smoking-ban"
     }
 ];
-
+let contador = 0;
 for (let propiedad of propiedades_ventas){
-                template +=  `<div class="col-md-4 mb-4">
-                                <div class="card">
-                                <img  class="card-img-top"
-                                        src="${propiedad.src}" 
-                                        alt="Imagen del departamento"/>
-                                        <div class="card-body">
-                                            <h5 class="card-title">${propiedad.nombre}</h5>
-                                            <p class="card-text">${propiedad.descripcion}</p>
-                                            <p><i class="fas fa-map-marker-alt"></i>${propiedad.ubicacion}</p>
-                                            <p>
-                                                <i class="fas fa-bed"></i> ${propiedad.habitaciones} Habitaciones |
-                                                <i class="fas fa-bath"></i> ${propiedad.banos} Baños
-                                            </p>
-                                            <p><i class="fas fa-dollar-sign"></i>${propiedad.costo}</p>`                                            
-                                              if(propiedad.smoke === true){
+    
+    if(contador <= 2){
+        
+         // Detener el bucle después de 3 iteraciones
+    
+                    template +=   `<div class="col-md-4 mb-4">
+                                   <div class="card">
+                                   <img  class="card-img-top"
+                                    src="${propiedad.src}" 
+                                    alt="Imagen del departamento"/>
+                                    <div class="card-body">
+                                    <h5 class="card-title">${propiedad.nombre}</h5>
+                                    <p class="card-text">${propiedad.descripcion}</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> ${propiedad.ubicacion}</p>
+                                    <p>
+                                        <i class="fas fa-bed"></i> ${propiedad.habitaciones} Habitaciones |
+                                        <i class="fas fa-bath"></i> ${propiedad.banos} Baños
+                                    </p>
+                                    <p><i class="fas fa-dollar-sign"></i> ${propiedad.costo}</p>`                                            
+                                              if(propiedad.smoke === true && propiedad.pets === true){
                                                     let itemFumar = `<p class="text-success"><i class="fas fa-smoking"></i>   Se permite Fumar</p>`
                                                     template += itemFumar;
+                                                    let itemMascota = `<p class="text-success"><i class="fas fa-paw"></i> Mascotas permitidas</p>`
+                                                    template+=itemMascota
                                                     }
-                                              else{
-                                                let itemFumar = `<p class="text-danger"><i class="fas fa-smoking-ban"></i> No se permite Fumar</p>`
-                                                template += itemFumar
-                                              }                                                             
-                                /* template += `` */
-                template += ` </div>
-                                </div>
-                                                    </div>`
-                                               /*  <p class="mascota">
-                                                <i class="fas fa-paw"></i> Mascotas permitidas
-                                             </p>` */
-                                
-                                
-                                    /* 
-                                </div>
-                            </div>` */
-                }    
-etiquetaCard.innerHTML += template;
-let fumar  = document.querySelector("fumar");
-console.log(fumar);
-function pintar(){}
-/* for(let propiedad of propiedades_ventas ){
-    template += `<img 
-                 class="card-img-top"
-                 src="${propiedad.src}}" 
-                 alt="Imagen del departamento">
-                 <div class="card-body">
-                    <h5 class="card-title">${propiedad.nombre}</h5>
-                    <p class="card-text">${propiedad.descripcion}</p>
-                    <p><i class="fas fa-map-marker-alt"></i>${propiedad.ubicacion}</p>
-                    <p>
-                        <i class="fas fa-bed"></i> ${propiedad.habitaciones} Habitaciones |
-                        <i class="fas fa-bath"></i> ${propiedad.banos} Baños
-                    </p>
-                <p><i class="fas fa-dollar-sign"></i>${propiedad.costo}</p>
-                 </div>`
-                <p class="text-danger">
-                <i class="fas fa-smoking-ban"></i> Si se permite fumar
-                </p>`;
-                const colorMascota = etiquetaCard.querySelector(".fa-smoking-ban");
-                colorMascota.style.color = propiedad.smoke ? "green" : "red"
-}
- */
-
-/* 
-if(propiedad.smoke === true){
-                   
-                    templateFumar.style.Color = "green";
-                }else{
-                    let templateFumar ="";
-                    templateFumar += `<p class="text-danger">
-                    <i class="fas fa-smoking-ban"></i> No se permite fumar
-                    </p>`;
-                    templateFumar.style.Color = "red";
-               }
-               template.appenChild(templateFumar);
-               template+= `</div>`
-                `
-                <p class="text-danger">
-                  <i class="fa-solid fa-ban"></i> No se permiten mascotas
-                </p>
-              </div>`
-              etiquetaCard.innerHTML += template
-            
-     */
+                                                else{
+                                                    let itemFumar = `<p class="text-danger"><i class="fas fa-smoking-ban"></i> No se permite Fumar</p>`
+                                                    template += itemFumar
+                                                    let itemMascota = `<p class="text-danger"><i class="fa-solid fa-ban"></i> Mascotas permitidas</p>`
+                                                    template+=itemMascota
+                                                    }                                                             
+                     template += ` </div>
+                                        </div>
+                                            </div>`;
+                                            
+                                            }
+         contador++                                                               
+        }etiquetaCard.innerHTML += template;
         
             
               
