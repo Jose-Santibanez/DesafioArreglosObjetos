@@ -1,42 +1,42 @@
 const propiedades_alquiler = [
     {    
-           nombre: 'Apartamento en el centro de la ciudad',
-           src: '',
-           descripcion: 'Este apartamento de 2 habitaciones está ubicado en el corazón de la ciudad, cerca de todo.',
-           ubicacion: '123 Main Street, Anytown, CA 91234',
-           habitaciones: 2,
+           nombre: 'Hare Nua',
+           src: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/00/97/23/hare-nua.jpg?w=1200&h=-1&s=1',
+           descripcion: 'Un oasis de calma y naturaleza ubicado en pleno centro de Rapa Nui.',
+           ubicacion: 'Atamu Tekena, Hanga Roa, Isla de Pascua 2770000 Chile',
+           habitaciones: 4,
            banos: 2,
            costo: 20000,
-           smoke: false,
+           smoke: true,
            pets: true
     },
     {    
-            nombre: 'Apartamento luminoso con vista al mar',
-            src: '',
+            nombre: 'Hotel Bidasoa',
+            src: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/f0/ca/ab/caption.jpg?w=1100&h=-1&s=1',
             descripcion: 'Este hermoso apartamento ofrece una vista impresionante al mar',
-            ubicacion: '456 Ocean Avenue, Seaside Town, CA 56789',
-            habitaciones: 3,
-            banos: 3,
+            ubicacion: 'Hotel Bidasoa está situado frente al Museo de la Moda, en el barrio exclusivo de Vitacura',
+            habitaciones: 4,
+            banos: 2,
             costo: 25000,
-            smoke: true,
+            smoke: false,
             pets: true
  },
  {    
-            nombre: 'Novotel viña del mar',
-            src: '',
-            descripcion: 'El Novotel Viña Del Mar está ubicado en Viña del Mar, a 800 metros de la playa Acapulco, y cuenta con centro de fitness y bar.',
-            ubicacion: 'chile,viña del mar, N° 424',
+            nombre: 'Solar Madariaga Hotel',
+            src: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/f4/4a/19/caption.jpg?w=1200&h=-1&s=1',
+            descripcion: 'Solar Madariaga Hotel ha sido construido en una hermosa propiedad, la casona post-colonial de nuestra familia.',
+            ubicacion: 'Gabriela Mistral 683, Vicuña, Vicuña 1760762 Chile',
             habitaciones: 3,
-            banos:3,
+            banos:2,
             costo: 45000,
-            smoke: false,
+            smoke: true,
             pets: true
 },
 {    
-            nombre: 'Hotel Hotu Matua by EI',
-            src: '',
+            nombre: 'Casa Primal',
+            src: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/84/f1/37/caption.jpg?w=800&h=-1&s=1',
             descripcion: 'ofrece alojamiento con piscina al aire libre, parking privado gratis, jardín y salón de uso común.',
-            ubicacion: 'Hanga Roa, 2770000 Hanga Roa, Chile',
+            ubicacion: 'Camino al Volcán 30517, San Alfonso, San José de Maipo 9460000 Chile',
             habitaciones: 3,
             banos: 2,
             costo: 42000,
@@ -44,3 +44,13 @@ const propiedades_alquiler = [
             pets: true
 }
 ]
+const etiquetaCard = document.querySelector(".alquiler");
+let contador = 0;
+let template =" ";v
+for (let propiedad of propiedades_alquiler){
+       if(contador > 2 ){
+              template += `
+              
+              `
+       }
+}
