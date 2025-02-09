@@ -106,25 +106,31 @@ const propiedades_ventas = [
 }
 ]
 
-// obtenemos el contendor de las card donde se insertara el template PARA LA GALERIA HASTA 3 OBJETOS
-const etiquetaCard = document.querySelector(".ventas");
-renderCardsGaleriaIncompleta ()
-   
+// Aqui controlamos el DOM del index
 
-// Agregar evento para mostrar todas las CARDS
+const contenedorVentasIndex = document.querySelector(".contenedor-VentasIndex")
+if(contenedorVentasIndex){
+    renderGaleria(propiedades_ventas,contenedorVentasIndex,3)  // Pasamos como argumento el Array, el contenedor a modificar, y la cantidad elementos
+}
 
-const btnVenta = document.querySelector(".btn-ventas"); // Obtengo el elemento del DOM btn
+// Aqui controlamos el DOM del pagina Alquiler.html
+const contenedorVentasHtml = document.getElementById("contenedorVentahtml");
+if(contenedorVentasHtml){
+    renderGaleria(propiedades_ventas,contenedorVentasHtml)
     
+}
 
-btnVenta.addEventListener("click", ()=>{
-    renderCardsGaleriaCompleta();
-})   
-          
+// El render del boton tiene que ir despues de render alquiler.html, ya que no carga los elementos en dom
+const btnVentas = document.querySelector(".btn-ventas")
+btnVentas.addEventListener("click", ()=>{
+    renderGaleria(propiedades_ventas,contenedorVentasIndex)
+}
+) 
 
-const contenedorVentas = document.querySelector(".contenedorVentasHtml");
-let completoVentasHtml =" ";
-       for(let propiedad of propiedades_ventas){
-        completoVentasHtml += `
+function renderGaleria (arr,container,cant){
+    let template = "";
+    for(propiedad of arr.slice(0,cant)){
+        template += `
               <div class="col-md-4 mb-4">
                      <div class="card">
                             <img
@@ -148,113 +154,25 @@ let completoVentasHtml =" ";
                                    <i class="fas fa-bath"></i> ${propiedad.banos}
                                    </p>
                                    <p><i class="fas fa-dollar-sign"></i>${propiedad.costo}</p>`
-                                                 if(propiedad.smoke === true && propiedad.pets === true){
-                                                     let itemFumar = `<p class="text-success"><i class="fas fa-smoking"></i>Se permite Fumar</p>`
-                                                     completoVentasHtml += itemFumar;
-                                                     let itemMascota = `<p class="text-success"><i class="fas fa-paw"></i> Mascotas permitidas</p>`
-                                                     completoVentasHtml+=itemMascota
-                                                     }
-                                                 else{
-                                                     let itemFumar = `<p class="text-danger"><i class="fas fa-smoking-ban"></i> No se permite Fumar</p>`
-                                                     completoVentasHtml += itemFumar
-                                                     let itemMascota = `<p class="text-danger"><i class="fa-solid fa-ban"></i> Mascotas permitidas</p>`
-                                                     completoVentasHtml+=itemMascota
-                                                     }                                                             
-                                                     completoVentasHtml +=  `</div>
-                                   </div>
-                                          </div>`;
-       }
-       contenedorVentas.innerHTML = completoVentasHtml;
+                                   if(propiedad.smoke){
+                                        let itemFumar = `<p class="text-success"><i class="fas fa-smoking"></i>Se permite Fumar</p>`
+                                        template += itemFumar;
+                                   }else{
+                                        let itemFumar = `<p class="text-danger"><i class="fas fa-smoking-ban"></i> No se permite Fumar</p>`
+                                        template += itemFumar;
+                                   }
+                                   if(propiedad.pets){
+                                        let itemMascota = `<p class="text-success"><i class="fas fa-paw"></i> Mascotas permitidas</p>`
+                                        template+=itemMascota
+                                   }else{
+                                        let itemMascota = `<p class="text-danger"><i class="fa-solid fa-ban"></i> Mascotas permitidas</p>`
+                                        template+=itemMascota
+                                   }
+                                   template +=  `</div>
+                                                    </div>
+                                                        </div>`;
+    }
+    container.innerHTML = template
 
+} 
 
-     
-function renderCardsGaleriaIncompleta () {
-        // Variable acumuladora
-    let template = '';   // Declaramos el template fuera para evitar re-rederizado y en let por que se actualiza la información del mismo
-    // Contador para contar las iteraciones del for y deterno con una condición.         
-    let contador = 0;
-
-    // Ahora vamos a recorrer el arreglo
-    for (let propiedad of propiedades_ventas){
-        
-        if(contador <= 2){
-            
-            // Detener el bucle después de 3 iteraciones
-        
-                        template +=   `<div class="col-md-4 mb-4">
-                                        <div class="card">
-                                            <img  class="card-img-top"
-                                                src="${propiedad.src}" 
-                                                alt="Imagen del departamento"/>
-                                                <div class="card-body">
-                                                <h5 class="card-title">${propiedad.nombre}</h5>
-                                                <p class="card-text">${propiedad.descripcion}</p>
-                                                <p><i class="fas fa-map-marker-alt"></i> ${propiedad.ubicacion}</p>
-                                                <p>
-                                                    <i class="fas fa-bed"></i> ${propiedad.habitaciones} Habitaciones |
-                                                    <i class="fas fa-bath"></i> ${propiedad.banos} Baños
-                                                </p>
-                                                <p><i class="fas fa-dollar-sign"></i> ${propiedad.costo}</p>`                                            
-                                                        if(propiedad.smoke === true && propiedad.pets === true){
-                                                                let itemFumar = `<p class="text-success"><i class="fas fa-smoking"></i>   Se permite Fumar</p>`
-                                                                template += itemFumar;
-                                                                let itemMascota = `<p class="text-success"><i class="fas fa-paw"></i> Mascotas permitidas</p>`
-                                                                template+=itemMascota
-                                                                }
-                                                            else{
-                                                                let itemFumar = `<p class="text-danger"><i class="fas fa-smoking-ban"></i> No se permite Fumar</p>`
-                                                                template += itemFumar
-                                                                let itemMascota = `<p class="text-danger"><i class="fa-solid fa-ban"></i> Mascotas permitidas</p>`
-                                                                template+=itemMascota
-                                                                }                                                             
-                    template +=  `</div>
-                                        </div>
-                                            </div>`;
-                                                
-                                                }
-            contador++                                                               
-            }etiquetaCard.innerHTML += template;
- }
- function renderCardsGaleriaCompleta () {
-    // Variable acumuladora
-let template = '';   // Declaramos el template fuera para evitar re-rederizado y en let por que se actualiza la información del mismo
-
-// Ahora vamos a recorrer el arreglo
-for (let propiedad of propiedades_ventas){
-
-    
-     // Detener el bucle después de 3 iteraciones
-
-                template +=   `<div class="col-md-4 mb-4">
-                                  <div class="card">
-                                    <img  class="card-img-top"
-                                        src="${propiedad.src}" 
-                                        alt="Imagen del departamento"/>
-                                        <div class="card-body">
-                                        <h5 class="card-title">${propiedad.nombre}</h5>
-                                        <p class="card-text">${propiedad.descripcion}</p>
-                                        <p><i class="fas fa-map-marker-alt"></i> ${propiedad.ubicacion}</p>
-                                        <p>
-                                            <i class="fas fa-bed"></i> ${propiedad.habitaciones} Habitaciones |
-                                            <i class="fas fa-bath"></i> ${propiedad.banos} Baños
-                                        </p>
-                                        <p><i class="fas fa-dollar-sign"></i> ${propiedad.costo}</p>`                                            
-                                                if(propiedad.smoke === true && propiedad.pets === true){
-                                                        let itemFumar = `<p class="text-success"><i class="fas fa-smoking"></i>   Se permite Fumar</p>`
-                                                        template += itemFumar;
-                                                        let itemMascota = `<p class="text-success"><i class="fas fa-paw"></i> Mascotas permitidas</p>`
-                                                        template+=itemMascota
-                                                        }
-                                                    else{
-                                                        let itemFumar = `<p class="text-danger"><i class="fas fa-smoking-ban"></i> No se permite Fumar</p>`
-                                                        template += itemFumar
-                                                        let itemMascota = `<p class="text-danger"><i class="fa-solid fa-ban"></i> Mascotas permitidas</p>`
-                                                        template+=itemMascota
-                                                        }                                                             
-               template +=  `</div>
-                                 </div>
-                                      </div>`;
-                                        
-                                        }                                                          
-    etiquetaCard.innerHTML += template;
-}
