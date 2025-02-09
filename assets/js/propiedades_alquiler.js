@@ -88,56 +88,36 @@ const propiedades_alquiler = [
         smoke: true,
         pets: true
 }
-]
-const contenedorAlquilerHtml = document.querySelector(".contenedorAlquilerhtml")
-let templateCompletohtml =" ";
-       for(let propiedad of propiedades_alquiler){
-              templateCompletohtml += `
-              <div class="col-md-4 mb-4">
-                     <div class="card">
-                            <img
-                            src="${propiedad.src}"
-                            class="card-img-top"
-                            alt="Imagen del departamento"
-                            />
-                            <div class="card-body">
-                                   <h5 class="card-title">
-                                   ${propiedad.nombre}
-                                   </h5>
-                                   <p class="card-text">
-                                   ${propiedad.descripcion}
-                                   de la ciudad, cerca de todo.
-                                   </p>
-                                   <p>
-                                   <i class="fas fa-map-marker-alt"></i>${propiedad.ubicacion} 
-                                   </p>
-                                   <p>
-                                   <i class="fas fa-bed"></i> ${propiedad.habitaciones} |
-                                   <i class="fas fa-bath"></i> ${propiedad.banos}
-                                   </p>
-                                   <p><i class="fas fa-dollar-sign"></i>${propiedad.costo}</p>`
-                                                 if(propiedad.smoke === true && propiedad.pets === true){
-                                                     let itemFumar = `<p class="text-success"><i class="fas fa-smoking"></i>Se permite Fumar</p>`
-                                                     templateCompletohtml += itemFumar;
-                                                     let itemMascota = `<p class="text-success"><i class="fas fa-paw"></i> Mascotas permitidas</p>`
-                                                     templateCompletohtml+=itemMascota
-                                                     }
-                                                 else{
-                                                     let itemFumar = `<p class="text-danger"><i class="fas fa-smoking-ban"></i> No se permite Fumar</p>`
-                                                     templateCompletohtml += itemFumar
-                                                     let itemMascota = `<p class="text-danger"><i class="fa-solid fa-ban"></i> Mascotas permitidas</p>`
-                                                     templateCompletohtml+=itemMascota
-                                                     }                                                             
-templateCompletohtml +=  `</div>
-                                   </div>
-                                          </div>`;
-       }
-contenedorAlquilerHtml.innerHTML = templateCompletohtml;
+] 
 
-
+//agregegar solo 3 elementos en la galeria
 const cardAlquiler = document.querySelector(".contenedorAlquiler");
-let iterador = 0;
-let templatecard =" ";
+renderCardAlquilerIncompleta()
+
+// Agregar evento boton para mostrar todas las CARDS
+
+const btnAlquiler = document.querySelector(".btn-alquiler"); // Obtengo el elemento del DOM btn
+
+btnAlquiler.addEventListener("click", ()=>{
+       renderGaleriaAlquilerCompleta()
+})
+
+
+
+
+const contenedorAlquilerHtml = document.querySelector(".contenedorAlquilerhtml")
+
+
+
+
+
+
+
+
+
+function renderCardAlquilerIncompleta(){
+       let iterador = 0;
+       let templatecard =" ";
        for (let propiedad of propiedades_alquiler){
               if(iterador <= 2 ){
                      templatecard += `
@@ -182,13 +162,10 @@ let templatecard =" ";
               }
               iterador++;
        }
-cardAlquiler.innerHTML += templatecard// Aqui va el innerhtml
+       cardAlquiler.innerHTML += templatecard// Aqui va el innerhtml
+}
 
-// Agregar evento para mostrar todas las CARDS
-
-const btnAlquiler = document.querySelector(".btn-alquiler"); // Obtengo el elemento del DOM btn
-
-btnAlquiler.addEventListener("click", ()=>{
+function renderGaleriaAlquilerCompleta(){
        let templateCompleto =" ";
        for(let propiedad of propiedades_alquiler){
               templateCompleto += `
@@ -232,8 +209,50 @@ btnAlquiler.addEventListener("click", ()=>{
                                           </div>`;
        }
        cardAlquiler.innerHTML += templateCompleto// Aqui va el innerhtml
-})
+              }
 
-
-
-
+function renderAlquilerHtml(){
+       let templateCompletohtml =" ";
+       for(let propiedad of propiedades_alquiler){
+              templateCompletohtml += `
+              <div class="col-md-4 mb-4">
+                     <div class="card">
+                            <img
+                            src="${propiedad.src}"
+                            class="card-img-top"
+                            alt="Imagen del departamento"
+                            />
+                            <div class="card-body">
+                                   <h5 class="card-title">
+                                   ${propiedad.nombre}
+                                   </h5>
+                                   <p class="card-text">
+                                   ${propiedad.descripcion}
+                                   de la ciudad, cerca de todo.
+                                   </p>
+                                   <p>
+                                   <i class="fas fa-map-marker-alt"></i>${propiedad.ubicacion} 
+                                   </p>
+                                   <p>
+                                   <i class="fas fa-bed"></i> ${propiedad.habitaciones} |
+                                   <i class="fas fa-bath"></i> ${propiedad.banos}
+                                   </p>
+                                   <p><i class="fas fa-dollar-sign"></i>${propiedad.costo}</p>`
+                                                 if(propiedad.smoke === true && propiedad.pets === true){
+                                                     let itemFumar = `<p class="text-success"><i class="fas fa-smoking"></i>Se permite Fumar</p>`
+                                                     templateCompletohtml += itemFumar;
+                                                     let itemMascota = `<p class="text-success"><i class="fas fa-paw"></i> Mascotas permitidas</p>`
+                                                     templateCompletohtml+=itemMascota
+                                                     }
+                                                 else{
+                                                     let itemFumar = `<p class="text-danger"><i class="fas fa-smoking-ban"></i> No se permite Fumar</p>`
+                                                     templateCompletohtml += itemFumar
+                                                     let itemMascota = `<p class="text-danger"><i class="fa-solid fa-ban"></i> Mascotas permitidas</p>`
+                                                     templateCompletohtml+=itemMascota
+                                                     }                                                             
+templateCompletohtml +=  `</div>
+                                   </div>
+                                          </div>`;
+       }
+contenedorAlquilerHtml.innerHTML = templateCompletohtml;
+}
